@@ -1,6 +1,6 @@
 export default function Dashboard() {
    const handleLogout = () => {
-      localStorage.removeItem("token");
+      localStorage.removeItem("auth");
       window.location.href = "/login"; // force redirect
    };
 

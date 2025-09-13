@@ -1,0 +1,16 @@
+{
+   "message": {
+      "welcome": "Welcome to Team Planner"
+   },
+
+   "label": {
+      "login": "login",
+      "logout": "logout",
+      "dashboard": "dashboard",
+      "settings": "settings"
+   },
+
+   "form": {
+      "tes": "tes"
+   }
+}

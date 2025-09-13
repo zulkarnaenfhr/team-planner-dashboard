@@ -1,43 +1,32 @@
-import { useState } from "react";
-import { Home, Settings, LogOut, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { Home, Settings, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
-   const [isOpen, setIsOpen] = useState(true);
+   const navigate = useNavigate();
+
+   const handleLogout = () => {
+      localStorage.removeItem("auth"); // clear auth
+      navigate("/login"); // redirect
+   };
 
    return (
-      <div className="flex">
-         {/* Toggle button (hamburger) */}
-         <button onClick={() => setIsOpen(!isOpen)} className="p-3 bg-gray-900 text-white md:hidden">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-         </button>
+      <div className="w-64 bg-gray-900 text-white h-screen p-5 flex flex-col">
+         <h2 className="text-2xl font-bold mb-10">Team Planner</h2>
 
-         {/* Sidebar */}
-         <AnimatePresence>
-            {isOpen && (
-               <motion.div initial={{ x: -250 }} animate={{ x: 0 }} exit={{ x: -250 }} transition={{ duration: 0.3 }} className="fixed top-0 left-0 w-64 bg-gray-900 text-white h-screen p-5 flex flex-col md:relative">
-                  <h2 className="text-2xl font-bold mb-10">Team Planner</h2>
-                  <nav className="flex flex-col gap-4 flex-1">
-                     <Link to="/dashboard" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700">
-                        <Home size={20} /> Dashboard
-                     </Link>
-                     <Link to="/settings" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700">
-                        <Settings size={20} /> Settings
-                     </Link>
-                  </nav>
-                  <button
-                     onClick={() => {
-                        localStorage.removeItem("auth");
-                        window.location.href = "/login";
-                     }}
-                     className="flex items-center gap-3 p-2 rounded bg-red-600 hover:bg-red-700"
-                  >
-                     <LogOut size={20} /> Logout
-                  </button>
-               </motion.div>
-            )}
-         </AnimatePresence>
+         {/* ✅ Navigation */}
+         <nav className="flex flex-col gap-4 flex-1">
+            <Link to="/dashboard/home" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700">
+               <Home size={20} /> Home
+            </Link>
+            <Link to="/dashboard/settings" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700">
+               <Settings size={20} /> Settings
+            </Link>
+         </nav>
+
+         {/* ✅ Logout Button */}
+         <button onClick={handleLogout} className="flex items-center gap-3 p-2 rounded bg-red-600 hover:bg-red-700">
+            <LogOut size={20} /> Logout
+         </button>
       </div>
    );
 }

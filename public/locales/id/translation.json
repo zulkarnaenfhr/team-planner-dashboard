@@ -1,0 +1,16 @@
+{
+   "message": {
+      "welcome": "Selamat datang di Team Planner"
+   },
+
+   "label": {
+      "login": "masuk",
+      "logout": "keluar",
+      "dashboard": "dasbor",
+      "settings": "pengaturan"
+   },
+
+   "form": {
+      "tes": "tes"
+   }
+}

@@ -1,36 +1,45 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Card } from "primereact/card";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import CustomButton from "@/app/base/module/Button/Custom-Button";
+import { useTranslation } from "react-i18next";
+import "./login.css";
+import { Button } from "primereact/button";
 
 export default function Login() {
-   const [email, setEmail] = useState("");
+   const { t, i18n } = useTranslation();
+   const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
-   const navigate = useNavigate();
 
-   const handleLogin = (e) => {
+   const handleLogin = (e: React.FormEvent) => {
       e.preventDefault();
-      // cek dummy credential
-      if (email === "asd" && password === "asd") {
-         localStorage.setItem("auth", "true"); // simpan credential
-         navigate("/dashboard");
+
+      if (username === "asd" && password === "asd") {
+         localStorage.setItem("auth", "true");
+         window.location.href = "/dashboard"; // redirect
       } else {
          alert("Invalid credentials");
       }
    };
 
    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-         <form onSubmit={handleLogin} className="bg-white p-8 rounded-xl shadow-md w-96">
-            <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+      <div className="flex justify-content-center align-items-center h-screen bg-gray-100">
+         <Card title="Login" className="w-25rem shadow-2">
+            <form onSubmit={handleLogin} className="flex flex-column gap-3">
+               <div className="p-float-label">
+                  <InputText id="username" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full" />
+                  <label htmlFor="username">Username</label>
+               </div>
 
-            <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border rounded mb-4" />
-            {/* <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border rounded mb-4" /> */}
+               <div className="p-float-label">
+                  <Password id="password" value={password} onChange={(e) => setPassword(e.target.value)} toggleMask feedback={false} className="w-full" />
+                  <label htmlFor="password">Password</label>
+               </div>
 
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-2 border rounded mb-6" />
-
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-               Sign In
-            </button>
-         </form>
+               <CustomButton label="Login" type="submit" className="w-full" />
+            </form>
+         </Card>
       </div>
    );
 }

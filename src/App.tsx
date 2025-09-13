@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./app/main/login/login";
 import Dashboard from "./app/main/dashboard/dashboard";
+import Home from "@/app/main/dashboard/home/home";
 import type { ReactNode } from "react";
 
 type PrivateRouteProps = {
@@ -16,7 +17,10 @@ export default function App() {
    return (
       <BrowserRouter>
          <Routes>
+            {/* Public */}
             <Route path="/login" element={<Login />} />
+
+            {/* Protected Dashboard */}
             <Route
                path="/dashboard"
                element={
@@ -24,7 +28,16 @@ export default function App() {
                      <Dashboard />
                   </PrivateRoute>
                }
-            />
+            >
+               {/* ✅ Default redirect to /home */}
+               <Route index element={<Navigate to="home" replace />} />
+
+               <Route path="home" element={<Home />} />
+               {/* <Route path="users" element={<Users />} /> */}
+               {/* <Route path="settings" element={<Settings />} /> */}
+            </Route>
+
+            {/* Catch-all → redirect */}
             <Route path="*" element={<Navigate to="/login" />} />
          </Routes>
       </BrowserRouter>

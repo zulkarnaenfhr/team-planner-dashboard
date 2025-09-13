@@ -9,7 +9,7 @@ export default function Login() {
    const handleLogin = (e) => {
       e.preventDefault();
       // cek dummy credential
-      if (email === "admin@mail.com" && password === "simalakama") {
+      if (email === "asd" && password === "asd") {
          localStorage.setItem("auth", "true"); // simpan credential
          navigate("/dashboard");
       } else {
@@ -22,7 +22,8 @@ export default function Login() {
          <form onSubmit={handleLogin} className="bg-white p-8 rounded-xl shadow-md w-96">
             <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
 
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border rounded mb-4" />
+            <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border rounded mb-4" />
+            {/* <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border rounded mb-4" /> */}
 
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-2 border rounded mb-6" />
 

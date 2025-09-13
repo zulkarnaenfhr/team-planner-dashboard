@@ -1,0 +1,29 @@
+{
+   "compilerOptions": {
+      "target": "ESNext",
+      "useDefineForClassFields": true,
+      "module": "ESNext",
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],
+      "jsx": "react-jsx",
+
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+
+      "strict": true,
+      "noImplicitAny": true,
+      "forceConsistentCasingInFileNames": true,
+      "skipLibCheck": true,
+
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+
+      "baseUrl": ".",
+      "paths": {
+         "@/*": ["src/*"]
+      },
+
+      "noEmit": true
+   },
+   "include": ["src"]
+}

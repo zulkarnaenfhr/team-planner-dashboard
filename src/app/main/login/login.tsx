@@ -6,6 +6,7 @@ import CustomButton from "@/app/base/module/Button/Custom-Button";
 import { useTranslation } from "react-i18next";
 import "./login.css";
 import { Button } from "primereact/button";
+import CustomInput from "@/app/base/module/Input/Custom-Input";
 
 export default function Login() {
    const { t, i18n } = useTranslation();
@@ -24,22 +25,22 @@ export default function Login() {
    };
 
    return (
-      <div className="flex justify-content-center align-items-center h-screen bg-gray-100">
-         <Card title="Login" className="w-25rem shadow-2">
-            <form onSubmit={handleLogin} className="flex flex-column gap-3">
-               <div className="p-float-label">
-                  <InputText id="username" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full" />
-                  <label htmlFor="username">Username</label>
-               </div>
+      <div className="center-container fixed-container bg-gray-100">
+         <div>
+            <p className="text-40px-normal">{t("message.welcome")}</p>
 
-               <div className="p-float-label">
-                  <Password id="password" value={password} onChange={(e) => setPassword(e.target.value)} toggleMask feedback={false} className="w-full" />
-                  <label htmlFor="password">Password</label>
-               </div>
+            <div className="card-container center-container">
+               <Card title={t("page.loginpage.formtitle")} className="login-form-container">
+                  <form onSubmit={handleLogin} className="flex flex-column gap-3">
+                     <CustomInput id="username" label="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
 
-               <CustomButton label="Login" type="submit" className="w-full" />
-            </form>
-         </Card>
+                     <CustomInput id="password" label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+                     <CustomButton label="Login" type="submit" className="w-full" />
+                  </form>
+               </Card>
+            </div>
+         </div>
       </div>
    );
 }

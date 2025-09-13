@@ -1,6 +1,12 @@
 {
    "message": {
-      "welcome": "Welcome to Team Planner"
+      "welcome": "Welcome to SQI Planner Dashboard"
+   },
+
+   "page": {
+      "loginpage": {
+         "formtitle": "please login with your account"
+      }
    },
 
    "label": {

@@ -1,26 +1,29 @@
 import { useState } from "react";
 import { Card } from "primereact/card";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
 import CustomButton from "@/app/base/module/Button/Custom-Button";
 import { useTranslation } from "react-i18next";
 import "./login.css";
-import { Button } from "primereact/button";
 import CustomInput from "@/app/base/module/Input/Custom-Input";
+import { loginWithAxios } from "@/app/service/login/login.services";
 
 export default function Login() {
    const { t, i18n } = useTranslation();
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
 
-   const handleLogin = (e: React.FormEvent) => {
+   const handleLogin = async (e: React.FormEvent) => {
       e.preventDefault();
 
-      if (username === "asd" && password === "asd") {
-         localStorage.setItem("auth", "true");
+      const result = await loginWithAxios(username, password);
+      console.log(result);
+
+      if (result.status == "success") {
+         localStorage.setItem("auth", "true"); // clear auth
+         localStorage.setItem("id_member", "result.data.id_member");
+
          window.location.href = "/dashboard"; // redirect
       } else {
-         alert("Invalid credentials");
+         alert("gagal");
       }
    };
 

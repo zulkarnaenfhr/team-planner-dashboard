@@ -1,0 +1,11 @@
+{
+   "berhasil": {
+      "status": "DSHBOR-2000001",
+      "data": {
+         "message": "datanya"
+      }
+   },
+   "gagallogin": {
+      "status": "DSHBOR-400001"
+   }
+}

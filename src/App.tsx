@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./app/main/login/login";
 import Dashboard from "./app/main/dashboard/dashboard";
 import Home from "@/app/main/dashboard/home/home";
+import Settings from "@/app/main/dashboard/settings/settings";
 import type { ReactNode } from "react";
 
 type PrivateRouteProps = {
@@ -34,7 +35,7 @@ export default function App() {
 
                <Route path="home" element={<Home />} />
                {/* <Route path="users" element={<Users />} /> */}
-               {/* <Route path="settings" element={<Settings />} /> */}
+               <Route path="settings" element={<Settings />} />
             </Route>
 
             {/* Catch-all → redirect */}

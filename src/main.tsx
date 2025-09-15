@@ -8,9 +8,13 @@ import "primeicons/primeicons.css"; // Icons
 import "./index.css"; // Your custom styles
 import "./i18n"; // ✅ import i18n config
 import "primeflex/primeflex.css";
+import { Provider } from "react-redux";
+import { store } from "./app/store/store";
 
 createRoot(document.getElementById("root")!).render(
    <StrictMode>
-      <App />
+      <Provider store={store}>
+         <App />
+      </Provider>
    </StrictMode>
 );

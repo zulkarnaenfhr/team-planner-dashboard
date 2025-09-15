@@ -1,32 +1,29 @@
-import { Home, Settings, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+"use client";
+import { Sidebar } from "primereact/sidebar";
+import { Button } from "primereact/button";
 
-export default function Sidebar() {
-   const navigate = useNavigate();
+interface SidebarMenuProps {
+   visible: boolean;
+   onHide: () => void;
+   onLogout: () => void;
+   items: { label: string; icon: string; command: () => void }[];
+}
 
-   const handleLogout = () => {
-      localStorage.removeItem("auth"); // clear auth
-      navigate("/login"); // redirect
-   };
-
+export default function Customsidebar({ visible, onHide, onLogout, items }: SidebarMenuProps) {
    return (
-      <div className="w-64 bg-gray-900 text-white h-screen p-5 flex flex-col">
-         <h2 className="text-2xl font-bold mb-10">Team Planner</h2>
+      <Sidebar visible={visible} onHide={onHide}>
+         <h2 className="mb-3">Menu</h2>
+         <ul className="list-none p-0 m-0">
+            {items.map((item, i) => (
+               <li key={i} className="mb-2">
+                  <Button label={item.label} icon={item.icon} className="w-full justify-start" onClick={item.command} />
+               </li>
+            ))}
+         </ul>
 
-         {/* ✅ Navigation */}
-         <nav className="flex flex-col gap-4 flex-1">
-            <Link to="/dashboard/home" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700">
-               <Home size={20} /> Home
-            </Link>
-            <Link to="/dashboard/settings" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700">
-               <Settings size={20} /> Settings
-            </Link>
-         </nav>
-
-         {/* ✅ Logout Button */}
-         <button onClick={handleLogout} className="flex items-center gap-3 p-2 rounded bg-red-600 hover:bg-red-700">
-            <LogOut size={20} /> Logout
-         </button>
-      </div>
+         <Button onClick={onLogout} className="flex items-center gap-3 p-2 rounded bg-red-600 hover:bg-red-700 text-white mt-4 w-full">
+            Logout
+         </Button>
+      </Sidebar>
    );
 }

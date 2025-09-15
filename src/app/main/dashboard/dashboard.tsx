@@ -3,10 +3,9 @@
 
 "use client";
 import { useState } from "react";
-import { Menubar } from "primereact/menubar";
-import { Button } from "primereact/button";
-import { Sidebar } from "primereact/sidebar";
 import { Outlet, useNavigate } from "react-router-dom"; // if using React Router
+import CustomNavbar from "@/app/base/module/Navbar/Navbar";
+import Customsidebar from "@/app/base/module/Sidebar/Sidebar";
 
 export default function Dashboard() {
    const [visible, setVisible] = useState(false);
@@ -19,30 +18,18 @@ export default function Dashboard() {
    ];
 
    const handleLogout = () => {
-      localStorage.removeItem("auth"); // clear auth
-      navigate("/login"); // redirect
+      localStorage.removeItem("auth");
+      localStorage.removeItem("id_member");
+      navigate("/login");
    };
 
    return (
       <div className="h-screen flex flex-column">
          {/* Navbar */}
-         <Menubar model={[]} start={<Button icon="pi pi-bars" onClick={() => setVisible(true)} />} end={<span className="font-bold pr-3">Admin Dashboard</span>} />
+         <CustomNavbar onToggleSidebar={() => setVisible(true)} />
 
          {/* Sidebar */}
-         <Sidebar visible={visible} onHide={() => setVisible(false)}>
-            <h2 className="mb-3">Menu</h2>
-            <ul className="list-none p-0 m-0">
-               {items.map((item, i) => (
-                  <li key={i} className="mb-2">
-                     <Button label={item.label} icon={item.icon} className="w-full justify-start" onClick={item.command} />
-                  </li>
-               ))}
-            </ul>
-
-            <button onClick={handleLogout} className="flex items-center gap-3 p-2 rounded bg-red-600 hover:bg-red-700">
-               Logout
-            </button>
-         </Sidebar>
+         <Customsidebar visible={visible} onHide={() => setVisible(false)} onLogout={handleLogout} items={items} />
 
          {/* Content area */}
          <div className="flex-1 p-4 overflow-auto bg-gray-50">

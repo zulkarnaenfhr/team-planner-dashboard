@@ -6,24 +6,31 @@ import "./login.css";
 import CustomInput from "@/app/base/module/Input/Custom-Input";
 import { loginWithAxios } from "@/app/service/login/login.services";
 
+import { useDispatch } from "react-redux";
+import { setLoading } from "@/app/store/slice/loaderSlice";
+
 export default function Login() {
+   const dispatch = useDispatch();
+
    const { t, i18n } = useTranslation();
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
 
    const handleLogin = async (e: React.FormEvent) => {
       e.preventDefault();
+      dispatch(setLoading(true));
 
       const result = await loginWithAxios(username, password);
-      console.log(result);
 
       if (result.status == "success") {
          localStorage.setItem("auth", "true"); // clear auth
          localStorage.setItem("id_member", "result.data.id_member");
 
          window.location.href = "/dashboard"; // redirect
+         dispatch(setLoading(false));
       } else {
          alert("gagal");
+         dispatch(setLoading(false));
       }
    };
 

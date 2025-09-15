@@ -4,6 +4,9 @@ import Dashboard from "./app/main/dashboard/dashboard";
 import Home from "@/app/main/dashboard/home/home";
 import Settings from "@/app/main/dashboard/settings/settings";
 import type { ReactNode } from "react";
+import FullPageLoader from "./app/base/module/FullPageLoader/FullPageLoader";
+import { useSelector } from "react-redux";
+import { RootState } from "./app/store/store";
 
 type PrivateRouteProps = {
    children: ReactNode;
@@ -15,32 +18,38 @@ function PrivateRoute({ children }: PrivateRouteProps) {
 }
 
 export default function App() {
+   const isLoading = useSelector((state: RootState) => state.loader.isLoading);
+
    return (
-      <BrowserRouter>
-         <Routes>
-            {/* Public */}
-            <Route path="/login" element={<Login />} />
+      <>
+         {isLoading && <FullPageLoader />}
 
-            {/* Protected Dashboard */}
-            <Route
-               path="/dashboard"
-               element={
-                  <PrivateRoute>
-                     <Dashboard />
-                  </PrivateRoute>
-               }
-            >
-               {/* ✅ Default redirect to /home */}
-               <Route index element={<Navigate to="home" replace />} />
+         <BrowserRouter>
+            <Routes>
+               {/* Public */}
+               <Route path="/login" element={<Login />} />
 
-               <Route path="home" element={<Home />} />
-               {/* <Route path="users" element={<Users />} /> */}
-               <Route path="settings" element={<Settings />} />
-            </Route>
+               {/* Protected Dashboard */}
+               <Route
+                  path="/dashboard"
+                  element={
+                     <PrivateRoute>
+                        <Dashboard />
+                     </PrivateRoute>
+                  }
+               >
+                  {/* ✅ Default redirect to /home */}
+                  <Route index element={<Navigate to="home" replace />} />
 
-            {/* Catch-all → redirect */}
-            <Route path="*" element={<Navigate to="/login" />} />
-         </Routes>
-      </BrowserRouter>
+                  <Route path="home" element={<Home />} />
+                  {/* <Route path="users" element={<Users />} /> */}
+                  <Route path="settings" element={<Settings />} />
+               </Route>
+
+               {/* Catch-all → redirect */}
+               <Route path="*" element={<Navigate to="/login" />} />
+            </Routes>
+         </BrowserRouter>
+      </>
    );
 }

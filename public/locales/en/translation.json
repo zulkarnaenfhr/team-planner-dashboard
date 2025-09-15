@@ -17,6 +17,13 @@
    },
 
    "form": {
-      "tes": "tes"
+      "login": {
+         "username": {
+            "label": "username"
+         },
+         "password": {
+            "label": "password"
+         }
+      }
    }
 }

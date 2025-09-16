@@ -1,12 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+@import url(./component.styling.css);
+
 * {
    font-family: "Roboto", sans-serif;
    /* overflow: hidden; */
 }
 
 :root {
-   --color-background: #f5f5f5;
+   --color-background: #f9fafb;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+   display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html,
+body {
+   -ms-overflow-style: none; /* IE and Edge */
+   scrollbar-width: none; /* Firefox */
+   margin: 0 !important;
 }
 
 .center-container {

@@ -1,0 +1,29 @@
+:where(.css-dev-only-do-not-override-xepvsj).ant-layout {
+   background: var(--color-background);
+}
+
+/* header  */
+:where(.css-dev-only-do-not-override-xepvsj).ant-layout-header {
+   height: 60px;
+   z-index: 997;
+   background-color: var(--surface-card);
+   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.02), 0 0 2px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+/* end of header  */
+
+/* sidebar  */
+.ant-layout-sider-trigger {
+   display: none;
+}
+
+:where(.css-dev-only-do-not-override-xepvsj).ant-layout-sider {
+   background-color: red !important;
+   margin: 40px 10px;
+   padding: 20px;
+
+   width: 300px;
+   z-index: 999;
+   border-radius: 12px;
+   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.02), 0 0 2px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+/* end of sidebar  */

@@ -33,16 +33,43 @@ const contentStyle: React.CSSProperties = {
 type Props = {
    children: ReactNode;
 };
-import { Outlet, useNavigate } from "react-router-dom";
+
+import type { MenuProps } from "antd";
+import { Menu } from "antd";
+import { useChangeRoute } from "@/app/base/helper/hooks/globalHooks";
+
+type MenuItem = Required<MenuProps>["items"][number];
 
 const TempLayout: React.FC<Props> = ({ children }) => {
    const [collapsed, setCollapsed] = useState(false);
-   const navigate = useNavigate();
+   const { changeRoute } = useChangeRoute();
+   const [current, setCurrent] = useState("mail");
+
+   const onClick: MenuProps["onClick"] = (e) => {
+      console.log("click ", e);
+      setCurrent(e.key);
+   };
+
    const handleLogout = () => {
       localStorage.removeItem("auth");
       localStorage.removeItem("id_member");
-      navigate("/login");
+      changeRoute("/login");
    };
+
+   const items: MenuItem[] = [
+      {
+         key: "Dashboard",
+         label: <div onClick={() => changeRoute("/dashboard")}>Dashboard</div>,
+      },
+      {
+         label: "Settings",
+         key: "SubMenu",
+         children: [
+            { key: "Member", label: <div onClick={() => changeRoute("/dashboard/settings/member")}>Member</div> },
+            { key: "Project", label: <div onClick={() => changeRoute("/dashboard/settings/project")}>Project</div> },
+         ],
+      },
+   ];
 
    return (
       <Layout style={layoutStyle}>
@@ -50,16 +77,13 @@ const TempLayout: React.FC<Props> = ({ children }) => {
             {/* <Button type="primary" onClick={() => setCollapsed(!collapsed)}>
                   {collapsed ? "Expand" : "Collapse"}
                </Button> */}
-            <span>Header</span>
+            {/* <span>Header</span> */}
+            <p className="text-20px-bold">CC Extended Dashboard Planner</p>
          </Header>
          <Layout>
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} width={250}>
-               Sidebarasdasd
-               <div className="mt-auto p-3 hover:bg-red-600 cursor-pointer flex items-center gap-2" onClick={handleLogout}>
-                  <i className="pi pi-sign-out"></i>
-                  <span>Logout</span>
-               </div>
-               <h1>masuk</h1>
+               <Menu onClick={onClick} defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} mode="inline" items={items} />
+               <button onClick={handleLogout}>logout</button>
             </Sider>
             <Content style={contentStyle}>{children}</Content>
          </Layout>

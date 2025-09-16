@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./app/main/login/login";
 import Dashboard from "./app/main/dashboard/dashboard";
-import Home from "@/app/main/dashboard/home/home";
-import Settings from "@/app/main/dashboard/settings/settings";
 import type { ReactNode } from "react";
 import FullPageLoader from "./app/base/module/FullPageLoader/FullPageLoader";
 import { useSelector } from "react-redux";
 import { RootState } from "./app/store/store";
+import Members from "./app/main/dashboard/settings/members";
+import Project from "./app/main/dashboard/settings/project";
 
 type PrivateRouteProps = {
    children: ReactNode;
@@ -38,12 +38,8 @@ export default function App() {
                      </PrivateRoute>
                   }
                >
-                  {/* ✅ Default redirect to /home */}
-                  <Route index element={<Navigate to="home" replace />} />
-
-                  <Route path="home" element={<Home />} />
-                  {/* <Route path="users" element={<Users />} /> */}
-                  <Route path="settings" element={<Settings />} />
+                  <Route path="settings/member" element={<Members />} />
+                  <Route path="settings/project" element={<Project />} />
                </Route>
 
                {/* Catch-all → redirect */}

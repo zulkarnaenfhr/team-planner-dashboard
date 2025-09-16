@@ -41,6 +41,11 @@ body {
    background: var(--color-background);
 }
 
+h1,
+p {
+   margin: 0px !important;
+}
+
 .text-40px-normal {
    font-size: 40px;
    font-weight: normal;
@@ -51,7 +56,12 @@ body {
    font-weight: 700;
 }
 
+.text-20px-bold {
+   font-size: 20px;
+   font-weight: 700;
+}
+
 .text-14px-normal {
-   font-size: 16px;
+   font-size: 14px;
    font-weight: 400;
 }

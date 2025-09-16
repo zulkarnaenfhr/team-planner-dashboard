@@ -1,6 +1,7 @@
 "use client";
 import React, { ReactNode, useState } from "react";
 import { Layout, Button } from "antd";
+import "./TempLayout.css";
 
 const { Header, Sider, Content } = Layout;
 
@@ -75,16 +76,29 @@ const TempLayout: React.FC<Props> = ({ children }) => {
       <Layout style={layoutStyle}>
          <Header className="header-component">
             {/* <Button type="primary" onClick={() => setCollapsed(!collapsed)}>
-                  {collapsed ? "Expand" : "Collapse"}
-               </Button> */}
-            {/* <span>Header</span> */}
-            <p className="text-20px-bold">CC Extended Dashboard Planner</p>
+               {collapsed ? "Expand" : "Collapse"}
+            </Button> */}
+            <div className="header-container">
+               <p className="text-20px-bold">CC Extended Dashboard Planner</p>
+               <p className="text-20px-bold">CC Extended Dashboard Planner</p>
+            </div>
          </Header>
          <Layout>
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} width={250}>
-               <Menu onClick={onClick} defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} mode="inline" items={items} />
-               <button onClick={handleLogout}>logout</button>
+               {/* Menu di atas */}
+
+               <div className="sidebar-container">
+                  <Menu onClick={onClick} defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} mode="inline" items={items} />
+
+                  {/* Tombol Logout di paling bawah */}
+                  <div style={{ marginTop: "auto", padding: "16px" }}>
+                     <button onClick={handleLogout} style={{ width: "100%" }}>
+                        Logout
+                     </button>
+                  </div>
+               </div>
             </Sider>
+
             <Content style={contentStyle}>{children}</Content>
          </Layout>
       </Layout>

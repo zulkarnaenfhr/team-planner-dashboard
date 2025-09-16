@@ -28,8 +28,7 @@ export default function Dashboard() {
          {/* Navbar */}
          <CustomNavbar onToggleSidebar={() => setVisible(true)} />
 
-         {/* Sidebar */}
-         <Customsidebar visible={visible} onHide={() => setVisible(false)} onLogout={handleLogout} items={items} />
+         {/* Sidebar using menu bar*/}
 
          {/* Content area */}
          <div className="flex-1 p-4 overflow-auto bg-gray-50">
@@ -38,3 +37,5 @@ export default function Dashboard() {
       </div>
    );
 }
+
+

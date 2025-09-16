@@ -24,7 +24,7 @@ export default function Login() {
 
       if (result.status == "success") {
          localStorage.setItem("auth", "true"); // clear auth
-         localStorage.setItem("id_member", "result.data.id_member");
+         localStorage.setItem("id_member", result.data.id_member);
 
          window.location.href = "/dashboard"; // redirect
          dispatch(setLoading(false));

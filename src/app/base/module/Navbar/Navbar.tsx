@@ -7,5 +7,6 @@ interface NavbarProps {
 }
 
 export default function CustomNavbar({ onToggleSidebar }: NavbarProps) {
-   return <Menubar model={[]} start={<Button icon="pi pi-bars" onClick={onToggleSidebar} />} end={<span className="font-bold pr-3">Admin Dashboard</span>} />;
+   const user = localStorage.getItem("id_member");
+   return <Menubar model={[]} start={<Button icon="pi pi-bars" onClick={onToggleSidebar} />} end={<span className="font-bold pr-3">{user}</span>} />;
 }

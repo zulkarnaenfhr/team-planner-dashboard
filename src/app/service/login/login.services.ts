@@ -6,7 +6,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 export async function loginWithAxios(id_member: string, password_member: string) {
    try {
       const response = await axios.post(
-         `${SUPABASE_URL}/functions/v1/api-login`,
+         `${SUPABASE_URL}/functions/v1/dashboard-team-project-api-login-member`,
          { id_member, password_member },
          {
             headers: {
